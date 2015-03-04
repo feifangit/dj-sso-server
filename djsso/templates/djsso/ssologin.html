@@ -1,0 +1,69 @@
+{% extends "admin/login.html" %}
+{% load i18n admin_static %}
+
+{% block branding %}<h1 id="site-name">{% trans 'Single Sign-on' %}</h1>{% endblock %}
+{% block welcome-msg %}{% endblock %}
+{% block userlinks %}{% endblock %}
+
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+    {% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please
+    correct the errors below." %}{% endif %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+    {% if ssouser.is_authenticated and not ssouser.is_anonymous %}
+    <h2>Continue with current user? {{ ssouser }}</h2>
+    <style>
+        .btn {
+            padding: 4px 8px;
+            margin-right: 4px;
+        }
+
+        .margin-bottom-25 {
+            margin-bottom: 25px;
+        }
+    </style>
+    <div class="margin-bottom-25">
+        <a href="{{ request.get_full_path }}&cwca=yes" class="btn">continue</a>
+        <a href="{{ request.get_full_path }}&cwca=no" class="btn">switch account</a>
+    </div>
+    <h4>please finish the login in {{ sso_timeout }} seconds.</h4>
+    {% else %}
+    <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+        <div class="form-row">
+            {{ form.username.errors }}
+            {{ form.username.label_tag }} {{ form.username }}
+        </div>
+        <div class="form-row">
+            {{ form.password.errors }}
+            {{ form.password.label_tag }} {{ form.password }}
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </div>
+        {% url 'admin_password_reset' as password_reset_url %}
+        {% if password_reset_url %}
+        <div class="password-reset-link">
+            <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+        </div>
+        {% endif %}
+        <div class="submit-row">
+            <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}"/>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        document.getElementById('id_username').focus()
+    </script>
+    {%endif%}
+</div>
+{% endblock %}
