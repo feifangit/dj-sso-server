@@ -11,7 +11,7 @@ from . import MAGIC_ID
 
 class SSO(models.Model):
     class Meta:
-        verbose_name = "Single sign-on"
+        verbose_name = "SSO credential"
 
     credential = models.ForeignKey(APIKeys)
     host = models.CharField(max_length=100, unique=True)

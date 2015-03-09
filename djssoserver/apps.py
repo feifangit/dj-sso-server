@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class SSOConfig(AppConfig):
-    name = "djsso"
-    verbose_name = "SSO"
+    name = "djssoserver"
+    verbose_name = "Single sign-on"
