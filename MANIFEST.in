@@ -1,6 +1,6 @@
 include LICENSE
 include README.rst
 recursive-include djssoserver/migrations *.py
-recursive-include djssoserver/templates *.py
+recursive-include djssoserver/templates *.html
 prune *.pyc
 prune *.sw*
