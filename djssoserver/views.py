@@ -7,7 +7,10 @@ from djapiauth.auth import api_auth
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.sites.shortcuts import get_current_site
+try:
+    from django.contrib.sites.shortcuts import get_current_site
+except:
+    from django.contrib.sites.models import get_current_site
 from django.contrib.auth.models import AnonymousUser
 
 try:
