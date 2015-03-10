@@ -6,7 +6,9 @@ import uuid
 from django.forms.models import model_to_dict
 from django.conf import settings
 from django.core.cache import cache
-from hydra.utility import MyEncoder
+from . import SSO_SERVER_USER_MODEL_TO_DICT_CLS
+from django.utils.module_loading import import_by_path
+
 
 SSO_SEC_KEY = settings.SECRET_KEY
 SSO_REQUEST_TOKEN_TTL = 240
@@ -23,7 +25,7 @@ class RequestToken(object):
         cachedreqtoken = RequestToken.gen_cached_key(request_token)
         cache.set(cachedreqtoken, json.dumps(
             model_to_dict(user, exclude=["password", "user_permissions"]),
-            cls=MyEncoder))
+            cls=import_by_path(SSO_SERVER_USER_MODEL_TO_DICT_CLS)))
 
     @staticmethod
     def load_info(_request_token):
