@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '51nq+jny--lu9(xt%9o+@-439vy79xr(!_%1a@8^kmsy5hckvs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #False if os.getenv('DATABASE_URL', None) else True
+DEBUG = False if os.getenv('DATABASE_URL', None) else True
 
 TEMPLATE_DEBUG = True
 
