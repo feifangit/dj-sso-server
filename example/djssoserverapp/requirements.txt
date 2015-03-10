@@ -1,0 +1,9 @@
+django==1.6
+dj-sso-server==0.4
+gunicorn
+dj-database-url
+psycopg2
+redis
+django-redis-cache
+wsgiref
+whitenoise

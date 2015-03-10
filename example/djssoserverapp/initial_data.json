@@ -1,0 +1,100 @@
+[
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "user1", 
+        "first_name": "my fn", 
+        "last_name": "my ln", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-03-09T23:58:00.902Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$wRM1GAxzSMWH$pylxKXTyTD7k2MyncKqVCse6tAU9X/nFD+zpfP+rLhg=", 
+        "email": "user1@ooo.com", 
+        "date_joined": "2015-03-09T23:24:08Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "fanfei", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2015-03-10T00:03:42.635Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$1lz84iBIG3EB$5U7F7KsbrRGO7MbbTbR3XWgrOi1zDLDe2Rl7hMpwT8M=", 
+        "email": "x@x.com", 
+        "date_joined": "2015-03-10T00:03:38.684Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "djapiauth.apientrypoint", 
+    "fields": {
+        "pattern": "(lp1\ncre\n_compile\np2\n(S'^sso/'\np3\nI32\ntRp4\nag2\n(S'^reqeusttoken/$'\np5\nI32\ntRp6\na.", 
+        "name": "^sso/ ^reqeusttoken/$"
+    }
+},
+{
+    "pk": 2, 
+    "model": "djapiauth.apientrypoint", 
+    "fields": {
+        "pattern": "(lp1\ncre\n_compile\np2\n(S'^sso/'\np3\nI32\ntRp4\nag2\n(S'^authtoken/$'\np5\nI32\ntRp6\na.", 
+        "name": "^sso/ ^authtoken/$"
+    }
+},
+{
+    "pk": 2, 
+    "model": "djapiauth.apikeys", 
+    "fields": {
+        "note": "for host: localhost:8000 SSO login", 
+        "seckey": "6a4eeaea54d54f51af703e79c6096d51", 
+        "apikey": "f4a05287", 
+        "user": null, 
+        "apis": [
+            1, 
+            2
+        ]
+    }
+},
+{
+    "pk": 3, 
+    "model": "djapiauth.apikeys", 
+    "fields": {
+        "note": "for host: 127.0.0.1:8000 SSO login", 
+        "seckey": "7274cf1a76774b3a80f3748f6f48e2a0", 
+        "apikey": "7d51755c", 
+        "user": null, 
+        "apis": [
+            1, 
+            2
+        ]
+    }
+},
+{
+    "pk": 1, 
+    "model": "djssoserver.sso", 
+    "fields": {
+        "note": "for localhost", 
+        "credential": 2, 
+        "host": "localhost:8000"
+    }
+},
+{
+    "pk": 2, 
+    "model": "djssoserver.sso", 
+    "fields": {
+        "note": "for 127.0.0.1", 
+        "credential": 3, 
+        "host": "127.0.0.1:8000"
+    }
+}
+]
