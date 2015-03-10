@@ -114,4 +114,4 @@ def login(request):
 
     }
 
-    return TemplateResponse(request, 'djsso/ssologin.html', context)
+    return TemplateResponse(request, 'djssoserver/ssologin.html', context)
