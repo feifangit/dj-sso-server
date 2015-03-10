@@ -110,7 +110,8 @@ def login(request):
         'site_name': current_site.name,
         'remote_app': url_info_to.netloc,
         "sso_timeout": SSO_REQUEST_TOKEN_TTL,
-        "ssouser": ssouser
+        "ssouser": ssouser,
+        "req": request  # name req will not confilict with request if django.core.context_processors.request enabled
 
     }
 

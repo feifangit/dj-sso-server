@@ -35,8 +35,8 @@
         }
     </style>
     <div class="margin-bottom-25">
-        <a href="{{ request.get_full_path }}&cwca=yes" class="btn">continue</a>
-        <a href="{{ request.get_full_path }}&cwca=no" class="btn">switch account</a>
+        <a href="{{ req.get_full_path }}&cwca=yes" class="btn">continue</a>
+        <a href="{{ req.get_full_path }}&cwca=no" class="btn">switch account</a>
     </div>
     <h4>please finish the login in {{ sso_timeout }} seconds.</h4>
     {% else %}
