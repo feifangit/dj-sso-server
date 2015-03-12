@@ -54,41 +54,15 @@ Add ``dj-sso-server`` to project
 
 Settings
 --------
-- **SSO_SERVER_USER_MODEL_TO_DICT_CLS**
-	- optional, a path to JSON encoder class
-	- the default encoder processes ``datetime``, ``date``, ``time`` and ``decimal.Decimal``
+- **SSO_SERVER_USER_TO_JSON_FUNC**
+	- optional, a path to function receives an user object and return a json string.
+	- the default ``SSO_SERVER_USER_TO_JSON_FUNC`` function is ``djssoserver.utility.default_user_to_json``
 
-	.. code-block:: python
-		
-		# DjangoJSONEncoder from Django 1.7 source code
-		class DjangoJSONEncoder(json.JSONEncoder):
-		    """
-		    JSONEncoder subclass that knows how to encode date/time and decimal types.
-		    """
-
-		    def default(self, o):
-		        # See "Date Time String Format" in the ECMA-262 specification.
-		        if isinstance(o, datetime.datetime):
-		            r = o.isoformat()
-		            if o.microsecond:
-		                r = r[:23] + r[26:]
-		            if r.endswith('+00:00'):
-		                r = r[:-6] + 'Z'
-		            return r
-		        elif isinstance(o, datetime.date):
-		            return o.isoformat()
-		        elif isinstance(o, datetime.time):
-		            if is_aware(o):
-		                raise ValueError("JSON can't represent timezone-aware times.")
-		            r = o.isoformat()
-		            if o.microsecond:
-		                r = r[:12]
-		            return r
-		        elif isinstance(o, decimal.Decimal):
-		            return str(o)
-		        else:
-		            return super(DjangoJSONEncoder, self).default(o)
-
+		.. code-block:: python
+			
+			def default_user_to_json(user):
+			    return json.dumps(model_to_dict(user, exclude=["password", "user_permissions"]), 
+			        cls=DjangoJSONEncoder)
 
 Scan API
 ---------

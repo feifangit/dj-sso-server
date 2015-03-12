@@ -7,6 +7,7 @@ import urlparse
 
 from django.core.cache import cache
 from django.http import HttpResponse
+from django.forms.models import model_to_dict
 
 
 def is_aware(value):
@@ -76,9 +77,7 @@ def jsonify(function=None, options={}):
             resp = HttpResponse(json.dumps(func(*args, **kwargs), **options))
             resp["Content-Type"] = "application/json"
             return resp
-
         return wrapped
-
     return real_decorator if not function else real_decorator(function)
 
 
@@ -102,3 +101,11 @@ def append_tokens(url, **kwargs):
     query.update(kwargs)
     url_parts[4] = urllib.urlencode(query)
     return urlparse.urlunparse(url_parts)
+
+
+def default_user_to_json(user):
+    return json.dumps(model_to_dict(user, exclude=["password", "user_permissions"]), 
+        cls=DjangoJSONEncoder)
+    
+    
+

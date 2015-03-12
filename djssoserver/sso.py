@@ -6,7 +6,7 @@ import uuid
 from django.forms.models import model_to_dict
 from django.conf import settings
 from django.core.cache import cache
-from . import SSO_SERVER_USER_MODEL_TO_DICT_CLS
+from . import SSO_SERVER_USER_TO_JSON_FUNC
 from django.utils.module_loading import import_by_path
 
 
@@ -23,9 +23,7 @@ class RequestToken(object):
     def bind_info(request_token, user):
         # bind request token with user object
         cachedreqtoken = RequestToken.gen_cached_key(request_token)
-        cache.set(cachedreqtoken, json.dumps(
-            model_to_dict(user, exclude=["password", "user_permissions"]),
-            cls=import_by_path(SSO_SERVER_USER_MODEL_TO_DICT_CLS)))
+        cache.set(cachedreqtoken, import_by_path(SSO_SERVER_USER_TO_JSON_FUNC)(user))
 
     @staticmethod
     def load_info(_request_token):
