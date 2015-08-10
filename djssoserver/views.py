@@ -89,6 +89,8 @@ def login(request):
         if form.is_valid():
             RequestToken.bind_info(request_token, form.get_user())
             return okresp
+        else:
+            ssouser = AnonymousUser()
     else:  # GET
         form = AuthenticationForm(request)
         bContinueWithCurrentAccount = request.GET.get("cwca", None)
