@@ -35,9 +35,9 @@ How it works
 
 Attention
 ----------
-Since **request keys** are stored in cache waiting for verification or expiration. If you have multiple application process running in your deployment (gunicorn etc.), please use proper cache system that can be shared between processes. 
+Since **request keys** are stored in cache waiting for verification or expiration. The default cache uses in Django is **Local-memory caching** (``django.core.cache.backends.locmem.LocMemCache``) which soters data per process. You may have trouble while running in production enviorment (gunicorn etc.). 
 
-Memcached and Redis are both great for caching, be aware, the **Local-memory caching** (``django.core.cache.backends.locmem.LocMemCache``) is a toy for local debugging.
+Please use distributed cache systems, such as Memcached and Redis. 
 
 
 Add ``dj-sso-server`` to project
