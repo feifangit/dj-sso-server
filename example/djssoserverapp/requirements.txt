@@ -1,4 +1,4 @@
-django==1.6
+django==2.2.24
 dj-sso-server==0.4
 gunicorn
 dj-database-url
